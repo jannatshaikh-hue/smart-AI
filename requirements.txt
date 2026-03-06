@@ -22,13 +22,14 @@ numpy>=1.24.0
 pandas>=2.0.0
 scikit-learn>=1.3.0
 
-# Multi-modal
+# Multi-modal (optional)
 pillow>=10.0.0
 pytesseract>=0.3.10
 latex2mathml>=3.0.0
 
 # Database
 sqlalchemy>=2.0.0
+sqlite3  # Built-in
 
 # Visualization
 plotly>=5.17.0
