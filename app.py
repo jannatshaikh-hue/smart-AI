@@ -1,24 +1,19 @@
-﻿import streamlit as st
+
+
+
+import streamlit as st
 from core.rag_engine import RAGEngine
-import os
 
 st.set_page_config(page_title="Smart AI Agent", layout="wide")
 
 st.title("🤖 Smart AI Agent")
 
 # -------------------------
-# Load Tavily API Key
+# Tavily API Key
 # -------------------------
 
 if "tavily_api_key" not in st.session_state:
-    try:
-        st.session_state.tavily_api_key = st.secrets["TAVILY_API_KEY"]
-    except:
-        st.session_state.tavily_api_key = ""
-
-# -------------------------
-# Sidebar
-# -------------------------
+    st.session_state.tavily_api_key = ""
 
 st.sidebar.title("Settings")
 
@@ -45,14 +40,18 @@ else:
 # Initialize RAG Engine
 # -------------------------
 
-rag = RAGEngine(api_key=st.session_state.tavily_api_key)
+rag = RAGEngine()
 
 # -------------------------
-# Chat Interface
+# Chat History
 # -------------------------
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
+
+# -------------------------
+# Chat Input
+# -------------------------
 
 user_input = st.chat_input("Ask anything...")
 
@@ -61,7 +60,7 @@ if user_input:
     st.session_state.messages.append({"role": "user", "content": user_input})
 
     with st.spinner("Thinking..."):
-        response = rag.query(user_input)
+        response = rag.generate_response(user_input, [])
 
     st.session_state.messages.append({"role": "assistant", "content": response})
 
