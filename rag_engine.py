@@ -1,8 +1,8 @@
-﻿class RAGEngine:
+class RAGEngine:
     def __init__(self, config=None):
         self.config = config
         self.documents = []
-        print("✅ RAG Engine initialized")
+        print("RAG Engine initialized")
 
     def add_documents(self, documents):
         if documents:
